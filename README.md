@@ -29,7 +29,7 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 </p>
 
 ### *Step 4*
-  In this step, the regression prediction replaced the missing value in *Rain*. Also, the mean impute in *Customers* has been set back to *Missing*. Note that *Temperature* was left alone. A regresson is run the imputes a new value for the missing value in *Customers*. This is shown in step 4. 
+  In this step, the regression prediction replaced the missing value in *Customers*. Also, the mean impute in *Temperature* has been set back to *Missing*. Note that *Rain* was left alone. A regresson is run the imputes a new value for the missing value in *Temperature*. This is shown in step 4. 
 <p align="left">
   <img src="https://github.com/petesteamster/capstone/blob/master/missing_data04_B.png" height="300" width="300">
 </p>

@@ -1,4 +1,14 @@
+## The Problem of Missing Data 
+Below is a partial data set used to predict sales at a hardware store for a month. The features are ***Rain (1=yes,0=no),Cloudy (1=yes,0=no),Temperature,Customers in a 24 hour period***. The features are used in an attempt to see how weather affects sales. Note that some of the data is flagged as missing. A predictive model cannot be built if we do not fill in the missing data with values. Also, because collecting data takes time and money, we dont want to toss the data out. What values should we use to fill in the missing data?
 
+<p align="left">
+  <img src="https://github.com/petesteamster/capstone/blob/master/missing_data01.png" height="300" width="360">
+</p>
+
+## Impute Missing Data
+The term for guessing/replacing a value for the missing data is **imputation**. A simple imputation method is to calculate the mean or the median of a column that has missing data and then set all the missing data in that column to the value of the calcuation. Of course, the calculation is only performed on the values in the column that are *not missing*. Although this method is used all the time, it has some flaws. A major flaw is it artificailly reduces the variance. This can decrease the size of confidence intervals which can lead to making poor inferences. 
+## MICE
+MICE is an acronym for *Multivariate Imputation by Chained Equations*. It imputes missing values via regression. 
 
   # Goal
   

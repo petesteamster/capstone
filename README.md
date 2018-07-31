@@ -8,8 +8,20 @@ Below is a partial data set used to predict sales at a hardware store for a mont
 ## Impute Missing Data
 The term for guessing/replacing a value for the missing data is **imputation**. A simple imputation method is to calculate the mean or the median of a column that has missing data and then set all the missing data in that column to the value of the calcuation. Of course, the calculation is only performed on the values in the column that are *not missing*. Although this method is used all the time, it has some flaws. A major flaw is it artificailly reduces the variance. This can decrease the size of confidence intervals which can lead to making poor inferences. 
 ## MICE
-MICE is an acronym for *Multivariate Imputation by Chained Equations*. It imputes missing values via regression. 
-
+MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an algorithm that relies on regression methods to perform imputations. Below we provide a high level/stepwise description of how MICE works.  
+   ### *Step 1*
+   Below is the partial dataset with only features. We use the *mean impute* method on all the missing values except 1. This is illustrated in step 2.  
+<p align="left">
+  <img src="https://github.com/petesteamster/capstone/blob/master/missing_data01_B.png" height="300" width="300">
+</p>
+  
+  ### *Step 2*
+  In the dateset below, the missing values in *Customer* and *Temperature* have been replaced with the column mean. The missing value in 
+  *rain* was left *missing*. 
+<p align="left">
+  <img src="https://github.com/petesteamster/capstone/blob/master/missing_data02_B.png" height="300" width="300">
+</p>
+  
   # Goal
   
   - Evaluate two implemenatations of an imputation package called MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.

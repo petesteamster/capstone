@@ -29,12 +29,18 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 </p>
 
 ### *Step 4*
-  In this step, the regression prediction replaced the missing value in *Customers*. Also, the mean impute in *Temperature* has been set back to *Missing*. Note that *Rain* was left alone. A regresson is run the imputes a new value for the missing value in *Temperature*. This is shown in step 4. 
+  In this step, the regression prediction replaced the missing value in *Customers*. Also, the mean impute in *Temperature* has been set back to *Missing*. Note that *Rain* was left alone. A regresson is run the imputes a new value for the missing value in *Temperature*. This is shown in step 5. 
 <p align="left">
   <img src="https://github.com/petesteamster/capstone/blob/master/missing_data04_B.png" height="300" width="300">
 </p>
-  
-  # Goal
+ 
+ ### *Step 5*
+  In this step, the regression prediction replaced the missing value in *Temperature*. All the missing values have been replaced by a regression impute. This is run several times. For example, *Customers* might be set to *Missing* again and the regression rerun. Then *Rain* is reset. Etc. The process can go on for several iterations. This leads to imputed values that do not cause problems with variance reduction and so on. 
+<p align="left">
+  <img src="https://github.com/petesteamster/capstone/blob/master/missing_data05_B.png" height="300" width="300">
+</p>
+ 
+  # Goal: Compare the R and the Python implemtation of MICE
   
   - Evaluate two implemenatations of an imputation package called MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.
 - The data is from Kaggle. It is the Ames Housing Dataset used for building models that predict sale price.

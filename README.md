@@ -17,15 +17,21 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
   
   ### *Step 2*
   In the dateset below, the missing values in *Customer* and *Temperature* have been replaced with the column mean. The missing value in 
-  *Rain* was left *missing*. Now *Rain* can be imputed using a regression method. This is illustrated in **Step 3**. 
+  *Rain* was left *missing*. Now *Rain* can be imputed using a regression method. This is illustrated in step 3. 
 <p align="left">
   <img src="https://github.com/petesteamster/capstone/blob/master/missing_data02_B.png" height="300" width="300">
 </p>
 
 ### *Step 3*
-  In this step, the regression prediction replaced the missing value in *Rain*. Also, the mean impute in *Customers* has been set back to *Missing*. Note that *Temperature* was left alone. A regresson is run the imputes a new value for the missing value is *Customers*.
+  In this step, the regression prediction replaced the missing value in *Rain*. Also, the mean impute in *Customers* has been set back to *Missing*. Note that *Temperature* was left alone. A regresson is run the imputes a new value for the missing value in *Customers*. This is shown in step 4. 
 <p align="left">
   <img src="https://github.com/petesteamster/capstone/blob/master/missing_data03_B.png" height="300" width="300">
+</p>
+
+### *Step 4*
+  In this step, the regression prediction replaced the missing value in *Rain*. Also, the mean impute in *Customers* has been set back to *Missing*. Note that *Temperature* was left alone. A regresson is run the imputes a new value for the missing value in *Customers*. This is shown in step 4. 
+<p align="left">
+  <img src="https://github.com/petesteamster/capstone/blob/master/missing_data04_B.png" height="300" width="300">
 </p>
   
   # Goal

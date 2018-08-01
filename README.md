@@ -39,7 +39,10 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 <p align="left">
   <img src="https://github.com/petesteamster/capstone/blob/master/missing_data05_B.png" height="300" width="300">
 </p>
- 
+
+  ### Repeat the Steps from the top. 
+  When the steps are repeated, a new dataset is created with a new set of imputed values. The repeat process is done several time. The default for R is 5. A model is built on each of these data sets and the results are combined. The rules for combining to models are decribed by a paper from 1987 by Rubin. A copy of the paper can be found in the repo. The title is *Rubin's Rules*. Luckily, R and Python have functions that do all the calculations described in *Rubin's Rules*.     
+  
   # Goal: Compare the R and the Python implemtation of MICE
   
   - Evaluate two implemenatations of an imputation package called MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.

@@ -63,3 +63,5 @@ remove points which provides us a set that contains simulated missing data.
 - Because features drop in and out from run to run, we decided to use the final training data; that is the data 
 built from the features after they were weed out by the coorelation threshold process.
 -  We performed the missing data simulation on the features with the top 5 correlations 
+- We simulated 5%,10%, 15% and 50% missing data for each of these 5 features. This resulted in 4 files that were imputed with R and Python resulting in 8 training files which led to 8 models. Each of these models were valided using the exact same set of data for testing. The test data was not imputed. The models were built using imputed data.
+    

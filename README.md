@@ -43,17 +43,19 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
   ### Repeat the Steps from the top. 
   When the steps are repeated, a new dataset is created with a new set of imputed values. The repeat process is done several time. The default for R is 5. A model is built on each of these data sets and the results are combined. The rules for combining to models are decribed by a paper from 1987 by Rubin. A copy of the paper can be found in the repo. The title is *Rubin's Rules*. Luckily, R and Python have functions that do all the calculations described in *Rubin's Rules*.     
   
+  
+  
   # Goal: Compare the R and the Python implemtation of MICE
   
-  - Evaluate two implemenatations of an imputation package called MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.
-- The data is from Kaggle. It is the Ames Housing Dataset used for building models that predict sale price.
-- To compare the implementations, we used R-square scores. We also calculated an absolute sum of the different between imputed values and the baseline values. In this case, we treated the imputations in the same way predicted values is any regression are compared to actual values. 
-- We found that, given a caveat, R MICE and Python MICE perform at the same level. The caveat is that Python MICE fails if the data is correlated (singular) to such a degree that a model with a single solution cannot be found. This is because Python MICE has a single impute model that is a type of linear regression. R Mice has several alternative imputation models. It Random Forest option can handle data with singlarity issues.
+  - Now that we have described the MICE algorithm, we can get to the goal of the project. We want to evaluate two implemenatations of  MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.
+- We started by using data from Kaggle. It is the Ames Housing Dataset used for building models that predict sale price.
+- To compare the implementations, we used R-square scores. We also calculated an absolute sum of the differerence between imputed values and the baseline values. 
+- We found that, given a caveat, R MICE and Python MICE perform at the same level. The caveat is that Python MICE fails if the data is correlated (singular) to such a degree that a model with a single solution cannot be found. This is because Python MICE has a single impute model that is a type of linear regression. R Mice has several alternative imputation models. Its Random Forest option can handle data with singlarity issues.
 
 # Implementation and Analysis
 
 - For the most part, our model was secondary to our goal. We needed a descent model, but the results of the model were not our goal. The model was used as a means to evaluate the imputation process of Python MICE and R MICE. We used a model we created from an earlier project. We tweaked it a bit. We used a log transformation on the target in order to make its distribution more normal. The model has an R-square score in the range of .8. 
-- We used the Ame Housing Data. We assumed there was no missing data. An inspection of the data will show several categories with an 'NA' designation. We asuumed 'NA'to be valid. That is, we assumed 'NA' meant 'Not Applicable'. For example, the category 'Alley' indicates the type of alley that borders a given house. Most houses have no contiguous alleys. This the category is 'NA". 
+- We used the Ame Housing Data. We assumed there was no missing data. An inspection of the data will show several categories with an 'NA' designation. We asuumed 'NA' to be valid. That is, we assumed 'NA' meant 'Not Applicable'. For example, the category 'Alley' indicates the type of alley that borders a given house. Most houses have no contiguous alleys. This the category is 'NA". 
 - Assuming there is no missing data allows us to treat it as a baseline. We take this baseline data and randomly
 remove points which provides us a set that contains simulated missing data. 
 - As with most models, our model was based on features created from raw data. We created a large number of polynomial features. In an effort to trim the feature count down, we removed features that had an absolute correlation with the target (SalePrice) less than .25. We found that .25 gave us the best model. This resulted in approximately 160+ features.

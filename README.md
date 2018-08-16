@@ -43,25 +43,15 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
   ### Repeat the Steps from the top. 
   When the steps are repeated, a new dataset is created with a new set of imputed values. The repeat process is done several time. The default for R is 5. A model is built on each of these data sets and the results are combined. The rules for combining to models are decribed by a paper from 1987 by Rubin. A copy of the paper can be found in the repo. The title is *Rubin's Rules*. Luckily, R and Python have functions that do all the calculations described in *Rubin's Rules*.     
   
-  
-  
   # Goal: Compare the R and the Python implemtation of MICE
   
   - Now that we have described the MICE algorithm, we can get to the goal of the project. We want to evaluate two implemenatations of  MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.
-- We started by using data from Kaggle. It is the Ames Housing Dataset used for building models that predict sale price.
-- To compare the implementations, we used R-square scores. We also calculated an absolute sum of the differerence between imputed values and the baseline values. 
-- We found that, given a caveat, R MICE and Python MICE perform at the same level. The caveat is that Python MICE fails if the data is correlated (singular) to such a degree that a model with a single solution cannot be found. This is because Python MICE has a single impute model that is a type of linear regression. R Mice has several alternative imputation models. Its Random Forest option can handle data with singlarity issues.
+
 
 # Implementation and Analysis
 
-- For the most part, our model was secondary to our goal. We needed a descent model, but the results of the model were not our goal. The model was used as a means to evaluate the imputation process of Python MICE and R MICE. We used a model we created from an earlier project. We tweaked it a bit. We used a log transformation on the target in order to make its distribution more normal. The model has an R-square score in the range of .8. 
-- We used the Ame Housing Data. We assumed there was no missing data. An inspection of the data will show several categories with an 'NA' designation. We asuumed 'NA' to be valid. That is, we assumed 'NA' meant 'Not Applicable'. For example, the category 'Alley' indicates the type of alley that borders a given house. Most houses have no contiguous alleys. This the category is 'NA". 
-- Assuming there is no missing data allows us to treat it as a baseline. We take this baseline data and randomly
-remove points which provides us a set that contains simulated missing data. 
-- As with most models, our model was based on features created from raw data. We created a large number of polynomial features. In an effort to trim the feature count down, we removed features that had an absolute correlation with the target (SalePrice) less than .25. We found that .25 gave us the best model. This resulted in approximately 160+ features.
-- Each time we train our model, we shuffled the data. Since the mix of the training data changes from run to run, the correlation between each feature and the target changes from run to run. Thus, for each run, different features fall above or below the .25 correlation threshold. Therefore, the feature count varies from run to run. 
-- Because features drop in and out from run to run, we decided to use the final training data; that is the data 
-built from the features after they were weed out by the coorelation threshold process.
--  We performed the missing data simulation on the features with the top 5 correlations 
-- We simulated 5%,10%, 15% and 50% missing data for each of these 5 features. This resulted in 4 files that were imputed with R and Python resulting in 8 training files which led to 8 models. Each of these models were valided using the exact same set of data for testing. The test data was not imputed. The models were built using imputed data.
-    
+- To test, we simulated data with binary, poisson, ordinal and normal data. We wanted to see how well the imputed data matched the 'actual' i.e. simulated data. We decided to process all normal data such that it skewed to the right or left. We wanted some variety.
+Each set of simulated data had 10 columns. We did some calculations and found that there are 84 different ways to mix the four datatypes. For example, one comnation might be 2 poisson (p), 3 binary (b), 2 ordinal (o) and 3 normal (n). Another might be 4p, 4b, 1b and 1n. Etc. This leads to 84 different combination. Also, the probabilties for the binary and ordinals can vary. The mean for the poisson can vary as can the mean and the standard deviation for the normal. Another variable is the correlation matrix used for each simulation. We decided to simulate 168 sets of data - 2 for each of the 84 combinations.  Our finding are below.
+
+- We found that Python Mice does not handle discrete data well. It imputes fraction values for binary, ordinal and poisson data. On the other hand, R Mice imputes data with the data type. Since Python essentially fails when imputing descrete data, we decided there was no need to go further. That is, we did not perform a statistical analysis comparing R and Python for descrete data.
+- We performed extensive statistical analysis when we compared how R and Python MICE handle consinuous data. The analysis is described below 

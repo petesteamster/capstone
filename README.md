@@ -42,7 +42,7 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 </p>
 
   ### Repeat the Steps from the top. 
-  When the steps are repeated, a new dataset is created with a new set of imputed values. The repeat process is done several time. The default for R is 5. A model is built on each of these data sets and the results are combined. The rules for combining to models are decribed by a paper from 1987 by Rubin. A copy of the paper can be found in the repo. The title is *Rubin's Rules*. Luckily, R and Python have functions that do all the calculations described in *Rubin's Rules*.     
+  When the steps are repeated, a new dataset is created with a new set of imputed values. The repeat process is done several times. The default for R is 5. A model is built on each of these data sets and the results are combined. The rules for combining to models are decribed by a paper from 1987 by Rubin. A copy of the paper can be found in the repo. The title is *Rubin's Rules*. Luckily, R and Python have functions that do all the calculations described in *Rubin's Rules*.     
   
   # Goal: Compare the R and the Python (from the fancyimpute package) implementation of MICE
   
@@ -52,14 +52,14 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 # Analysis
 
 - A good imputation process will replace missing values with data that comes from the distrubution that the observed (non-missing) data comes from. We will compare the two versions of MICE with this in mind. Our analysis will use mathematical and visual comparison processes to see how well the imputations mimic the distribution of the observed data. 
-- To test, we simulated mutilvariate distributions that had binary, poisson, ordinal and normal columns of data . We wanted to see how well the imputed data matched the 'actual' i.e. simulated data. We decided to process all normal data such that it skewed to the right or left. We also varied the mean and the standard deviation. We also randomly applied second and third degree polynoial transformations to sets of normal data. We wanted continuous data with some variety in shape. 
-Each set of simulated data had 10 columns. We did some calculations and found that there are 84 different ways to mix the four datatypes. For example, one combination might be 2 poisson (2p), 3 binary (3b), 2 ordinal (2o) and 3 normal (3n). Another might be 4p, 4b, 1b and 1n. Etc. This leads to 84 different combinations. Also, the probabilties for the binary and ordinals can vary. The mean for the poisson can vary as can the mean and the standard deviation for the normal. Another variable is the correlation matrix used for each simulation. We decided to simulate 168 sets of data - 2 for each of the 84 combinations.  
+- To test, we simulated multivariate distributions that had binary, poisson, ordinal and normal columns of data . We wanted to see how well the imputed data matched the 'actual' i.e. simulated data. We decided to process all normal data such that it skewed to the right or left. We also varied the mean and the standard deviation. We also randomly applied second and third degree polynoial transformations to sets of normal data. We wanted continuous data with some variety in shape. 
+- Each set of simulated data had 10 columns. We did some calculations and found that there are 84 different ways to mix the four datatypes. For example, one combination might be 2 poisson (2p), 3 binary (3b), 2 ordinal (2o) and 3 normal (3n). Another might be 4p, 4b, 1b and 1n. Etc. This leads to 84 different combinations. Also, the probabilties for the binary and ordinals can vary. The mean for the poisson can vary as can the mean and the standard deviation for the normal. Another variable is the correlation matrix used for each simulation. We decided to simulate 168 sets of data - 2 for each of the 84 combinations.  
 - We found that Python Mice does not handle discrete data well. It imputes fractional values for binary, ordinal and poisson data. On the other hand, R Mice imputes data with the correct data type. Since Python essentially fails when imputing descrete data, we decided there was no need to go further. That is, we did not perform a statistical analysis comparing R and Python for descrete data.
 - We performed extensive statistical analysis in our comparison of how R and Python MICE handle continuous data. We compared density curves visually and numerically. Below are visual comparisions (plots).
 <p align="left">
   <img src="density01.png" height="500" width="500">
 </p>
-- The plots show the density of the actual values, R imputes, Python imputes and all three on top of each other. The Python data appear to over-sample near the peak of the distrubution. The R and the actual data appear to have the same distribution. This phenomnon was seen in a large portion of the density curves. 
+- The plots show the density of the Actual (sim) values, R imputes, Python imputes and all three on top of each other. The Python data appear to over-sample near the peak of the distrubution. The R and the Actual data appear to have the same distribution. This phenomnon was seen in a large portion of the density curves. 
 
 - To do the numeric comparisions, we used techniques from functional data analysis (we used the R package fdasrvf) to calculate a metric used to measure how simular two density curves (i.e. functions) are to each other. We compared the density curves of the Python and the R imputations to the actual values they replaced. We had enough data to perform a t-test. The results are shown in the table below.
 <p align="left">
@@ -71,13 +71,14 @@ The results in the table above show that the R density curve is 'closer' to the 
 <p align="left">
   <img src="table02.png" height="300" width="300">
 </p>
-The table reports the 95% confidence interval for the p-value calculated by the KS-test. The null value for the KS-test assumes that distribution A = distribution B. We compared R imputed data to the actual data and the Python imputed data to the actual data. Per results, we can reject the null hypothesis for the Python data and we cannot reject the null for the R data.
+The table reports the 95% confidence interval for the p-value calculated by the KS-test. The null hypothesis for the KS-test assumes that distribution A = distribution B. We compared R imputed data to the actual data and the Python imputed data to the actual data. Per results, we can reject the null hypothesis for the Python data and we cannot reject the null for the R data.
 
-- Note: We also used the KS-tests on our simulated data. For the sim-data, we filtered out sets that were simular based on Kolmogorov–Smirnov. All sim-distributions that had p-values between them that were greater than .05 we thrown out. We did this to help insure all of our sim-distributions were dissimular. 
+- Note: We also used the KS-tests on our simulated data. For the sim-data, we filtered out data sets that were simular based on Kolmogorov–Smirnov. All sim-data distributions that had p-values between them that were greater than .05 were thrown out. We did this to help insure all of our sim-data distributions were dissimular. 
 
 
 - Based on our results, we conclude that the R version of MICE does a very good job of imputing data that matches the distribution of the observed values. On the other hand, the Python version of MICE does not do well at this task. R has a better implementation of MICE than Python does. 
 
 # Next Step(s)
  
- - We want to see how the imputations perform in models. We will compare models with no imputed data, models with a mix of imputed/observed and models with some imputed data on each row. We will do this for R and Python. 
+ - We want to apply our methodolgy to do other comparsions. For example, we want to see how MICE and Amelia match up. Also, Python has a second implementation of MICE in scikit-learn which we want to investigate.
+ - We want to see how the imputations perform in models. We will compare models with no imputed data, models with a mix of imputed/observed and models with some imputed data on each row. 

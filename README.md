@@ -51,10 +51,11 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
 
 # Implementation and Analysis
 
+- A good imputation process will replace missing values with data that comes from the distrubution that the observed (non-missing) data comes from. We will compare the two versions of MICE with this in mind. Our analysis will use mathematical and visual comparison processes to see how well the imputations mimic the distribution of the observed data. 
 - To test, we simulated data with binary, poisson, ordinal and normal data. We wanted to see how well the imputed data matched the 'actual' i.e. simulated data. We decided to process all normal data such that it skewed to the right or left. We wanted continuous data with some variety in shape. 
 Each set of simulated data had 10 columns. We did some calculations and found that there are 84 different ways to mix the four datatypes. For example, one combination might be 2 poisson (2p), 3 binary (3b), 2 ordinal (2o) and 3 normal (3n). Another might be 4p, 4b, 1b and 1n. Etc. This leads to 84 different combinations. Also, the probabilties for the binary and ordinals can vary. The mean for the poisson can vary as can the mean and the standard deviation for the normal. Another variable is the correlation matrix used for each simulation. We decided to simulate 168 sets of data - 2 for each of the 84 combinations.  
 - We found that Python Mice does not handle discrete data well. It imputes fractional values for binary, ordinal and poisson data. On the other hand, R Mice imputes data with the correct data type. Since Python essentially fails when imputing descrete data, we decided there was no need to go further. That is, we did not perform a statistical analysis comparing R and Python for descrete data.
-- We performed extensive statistical analysis in our comparison of how R and Python MICE handle consinuous data. We compared density curves visually and numerically. Below are visual comparisions (plots).
+- We performed extensive statistical analysis in our comparison of how R and Python MICE handle continuous data. We compared density curves visually and numerically. Below are visual comparisions (plots).
 <p align="left">
   <img src="density01.png" height="500" width="500">
 </p>
@@ -79,4 +80,8 @@ The table reports the 95% confidence interval for the p-value calculated by the 
 </p>
 
 The Confidence intervals of the Actual and the R have a lot of overlap. The Python C.I. has no overlap with the other two. It's mean is significantly lower than the other two. 
-- Based on our results, we conclude that the R version of MICE outperforms the Python version.
+- Based on our results, we conclude that the R version of MICE does a very good job of imputing data that matches the distribution of the observed values. On the other hand, the Python version of MICE does not do well at this task. R has a better implementation of MICE than Python does. 
+
+# Next Step(s)
+ 
+ - We want to see how the imputations perform in models. We will compare models with no imputed data, models with a mix of imputed/observed and models with some imputed data on each row. We will do this for R and Python. 

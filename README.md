@@ -73,7 +73,7 @@ The results in the table above show that the R density curve is 'closer' to the 
 </p>
 The table reports the 95% confidence interval for the p-value calculated by the KS-test. The null value for the KS-test assumes that distribution A = distribution B. We compared R imputed data to the actual data and the Python imputed data to the actual data. Per results, we can reject the null hypothesis for the Python data and we cannot reject the null for the R data.
 
-- Note: We also used the KS-tests on our simulated data. For the sim-data, we filtered out sets that were simular based on Kolmogorov–Smirnov. All sim-distributions that had p-values between them that were greater than .05 we thrown out. We did this to help insure all of our sim-distrbutions were dissimular. 
+- Note: We also used the KS-tests on our simulated data. For the sim-data, we filtered out sets that were simular based on Kolmogorov–Smirnov. All sim-distributions that had p-values between them that were greater than .05 we thrown out. We did this to help insure all of our sim-distributions were dissimular. 
 
 
 - Based on our results, we conclude that the R version of MICE does a very good job of imputing data that matches the distribution of the observed values. On the other hand, the Python version of MICE does not do well at this task. R has a better implementation of MICE than Python does. 

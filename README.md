@@ -49,7 +49,7 @@ MICE is an acronym for *Multivariate Imputation by Chained Equations*. It is an 
   - Now that we have described the MICE algorithm, we can get to the goal of the project. We want to evaluate two implemenatations of  MICE. One implemenatation is written for R. It has been around since 2000. The other implementation is written for Python. It is much more recent than the R version.
 
 
-# Implementation and Analysis
+# Analysis
 
 - A good imputation process will replace missing values with data that comes from the distrubution that the observed (non-missing) data comes from. We will compare the two versions of MICE with this in mind. Our analysis will use mathematical and visual comparison processes to see how well the imputations mimic the distribution of the observed data. 
 - To test, we simulated data with binary, poisson, ordinal and normal data. We wanted to see how well the imputed data matched the 'actual' i.e. simulated data. We decided to process all normal data such that it skewed to the right or left. We wanted continuous data with some variety in shape. 

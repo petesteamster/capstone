@@ -67,11 +67,13 @@ Each set of simulated data had 10 columns. We did some calculations and found th
 </p>
 The results in the table above show that the R density curve is 'closer' to the actual data density than the Python density curve. Since we performed a t-test, we also have a p-value that indicates statistical significance.
 
-- We also performed Kolmogorov–Smirnov (KS) tests on the distributions. The KS test is used to see if two sample distributions are the same.  We ran a total of 75 KS-Tests for R v Actual and 75 KS-Tests for Python v Actual. The results are in the table below.
+- We also performed Kolmogorov–Smirnov (KS) tests on the distributions. The KS test is used to see if two sample distributions are the same.  We ran a total of 75 KS-Tests for R v Actual and 75 KS-Tests for Python v Actual. The results are in the table below. 
 <p align="left">
   <img src="table02.png" height="300" width="300">
 </p>
 The table reports the 95% confidence interval for the p-value calculated by the KS-test. The null value for the KS-test assumes that distribution A = distribution B. We compared R imputed data to the actual data and the Python imputed data to the actual data. Per results, we can reject the null hypothesis for the Python data and we cannot reject the null for the R data.
+
+- Note: We also used the KS-tests on our simulated data. For the sim-data, we filtered out sets that were simular based on Kolmogorov–Smirnov. All sim-distributions that had p-values between them that were greater than .05 we thrown out. We did this to help insure all of our sim-distrbutions were dissimular. 
 
 
 - Based on our results, we conclude that the R version of MICE does a very good job of imputing data that matches the distribution of the observed values. On the other hand, the Python version of MICE does not do well at this task. R has a better implementation of MICE than Python does. 
